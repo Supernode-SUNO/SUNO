@@ -1,0 +1,15 @@
+QT_TS = \
+  qt/locale/supernodecoin_de.ts \
+  qt/locale/supernodecoin_en.ts \
+  qt/locale/supernodecoin_en_US.ts \
+  qt/locale/supernodecoin_es.ts \
+  qt/locale/supernodecoin_es_ES.ts \
+  qt/locale/supernodecoin_fr_FR.ts \
+  qt/locale/supernodecoin_hr_HR.ts \
+  qt/locale/supernodecoin_it.ts \
+  qt/locale/supernodecoin_ko_KR.ts \
+  qt/locale/supernodecoin_nl.ts \
+  qt/locale/supernodecoin_pl.ts \
+  qt/locale/supernodecoin_ru.ts \
+  qt/locale/supernodecoin_tr.ts \
+  qt/locale/supernodecoin_zh_CN.ts

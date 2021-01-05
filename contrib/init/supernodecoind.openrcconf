@@ -1,0 +1,33 @@
+# /etc/conf.d/supernodecoind: config file for /etc/init.d/supernodecoind
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/supernodecoin/supernodecoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/supernodecoind"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/supernodecoind.pid"
+
+# Where to write supernodecoind data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/supernodecoind"
+
+# User and group to own supernodecoind process
+#BITCOIND_USER="supernodecoin"
+#BITCOIND_GROUP="supernodecoin"
+
+# Path to supernodecoind executable
+#BITCOIND_BIN="/usr/bin/supernodecoind"
+
+# Nice value to run supernodecoind under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#BITCOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for bitcoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+BITCOIND_SIGTERM_TIMEOUT=60

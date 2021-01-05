@@ -1,0 +1,3 @@
+usr/local/bin/supernodecoind usr/bin
+usr/local/bin/supernodecoin-cli usr/bin
+debian/examples/supernodecoin.conf etc/supernodecoin

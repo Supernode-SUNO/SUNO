@@ -1,0 +1,28 @@
+
+#!/bin/sh
+
+# setup supernodecoin account, homedir etc
+
+set -e
+
+SUNOUSER="supernodecoin"
+SUNOHOME="/var/lib/supernodecoin"
+
+if [ "$1" = "configure" ]; then
+	# Add supernodecoin user/group - this will gracefully abort if the user already exists.
+	# A homedir is never created.
+	set +e
+	adduser --system --home "${SUNOHOME}" --no-create-home --group "${SUNOUSER}" 2>/dev/null
+	set -e
+
+	# If the homedir does not already exist, create it with proper
+	# ownership and permissions.
+	if [ ! -d "${SUNOHOME}" ]; then
+		mkdir -m 0750 -p "${SUNOHOME}"
+		chown "${SUNOUSER}:${SUNOUSER}" "${SUNOHOME}"
+	fi
+fi
+
+#DEBHELPER#
+
+exit 0

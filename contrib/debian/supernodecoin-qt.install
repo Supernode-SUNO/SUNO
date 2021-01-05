@@ -1,0 +1,6 @@
+usr/local/bin/supernodecoin-qt usr/bin
+share/pixmaps/supernodecoin32.xpm usr/share/pixmaps
+share/pixmaps/supernodecoin16.xpm usr/share/pixmaps
+share/pixmaps/supernodecoin128.png usr/share/pixmaps
+debian/supernodecoin-qt.desktop usr/share/applications
+debian/supernodecoin-qt.protocol usr/share/kde4/services/

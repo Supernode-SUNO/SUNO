@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=SupernodeCoin
+Comment=SupernodeCoin P2P Cryptocurrency
+Comment[fr]=SupernodeCoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=SupernodeCoin, eşten eşe kriptografik sanal para birimi
+Exec=supernodecoin-qt %u
+Terminal=false
+Type=Application
+Icon=supernodecoin128
+MimeType=x-scheme-handler/supernodecoin;
+Categories=Office;Finance;
+StartupWMClass=SupernodeCoin-qt

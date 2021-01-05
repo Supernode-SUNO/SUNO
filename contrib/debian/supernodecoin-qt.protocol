@@ -1,0 +1,11 @@
+[Protocol]
+exec=supernodecoin-qt '%u'
+protocol=supernodecoin
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

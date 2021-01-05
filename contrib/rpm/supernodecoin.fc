@@ -1,0 +1,8 @@
+/usr/bin/supernodecoin-cli		--	gen_context(system_u:object_r:supernodecoin_exec_t,s0)
+/usr/sbin/supernodecoind		--	gen_context(system_u:object_r:supernodecoin_exec_t,s0)
+/usr/lib(64)?/supernodecoin/supernodecoind		--	gen_context(system_u:object_r:supernodecoin_exec_t,s0)
+
+/etc/supernodecoin(/.*)?		gen_context(system_u:object_r:supernodecoin_conf_t,s0)
+/var/lib/supernodecoin(/.*)?		gen_context(system_u:object_r:supernodecoin_var_lib_t,s0)
+
+(/var)?/run/supernodecoind(/.*)?   gen_context(system_u:object_r:supernodecoin_var_run_t,s0)

@@ -1,0 +1,710 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/supernodecoin-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# supernodecoin qt core #
+include Makefile.qt_locale.include
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/supernodecoin/forms/loadingdialog.ui \
+  qt/supernodecoin/forms/snackbar.ui \
+  qt/supernodecoin/forms/navmenuwidget.ui \
+  qt/supernodecoin/forms/lockunlock.ui \
+  qt/supernodecoin/forms/expandablebutton.ui \
+  qt/supernodecoin/forms/receivedialog.ui \
+  qt/supernodecoin/forms/topbar.ui \
+  qt/supernodecoin/forms/txrow.ui \
+  qt/supernodecoin/forms/dashboardwidget.ui \
+  qt/supernodecoin/forms/addresslabelrow.ui \
+  qt/supernodecoin/forms/contactdropdownrow.ui \
+  qt/supernodecoin/forms/mninfodialog.ui \
+  qt/supernodecoin/forms/optionbutton.ui \
+  qt/supernodecoin/forms/masternodewizarddialog.ui \
+  qt/supernodecoin/forms/mnrow.ui \
+  qt/supernodecoin/forms/masternodeswidget.ui \
+  qt/supernodecoin/forms/myaddressrow.ui \
+  qt/supernodecoin/forms/csrow.ui \
+  qt/supernodecoin/forms/sendchangeaddressdialog.ui \
+  qt/supernodecoin/forms/sendconfirmdialog.ui \
+  qt/supernodecoin/forms/sendcustomfeedialog.ui \
+  qt/supernodecoin/forms/sendchangeaddressdialog.ui \
+  qt/supernodecoin/forms/sendmultirow.ui \
+  qt/supernodecoin/forms/send.ui \
+  qt/supernodecoin/forms/addnewaddressdialog.ui \
+  qt/supernodecoin/forms/addnewcontactdialog.ui \
+  qt/supernodecoin/forms/requestdialog.ui \
+  qt/supernodecoin/forms/receivewidget.ui \
+  qt/supernodecoin/forms/tooltipmenu.ui \
+  qt/supernodecoin/forms/addresseswidget.ui \
+  qt/supernodecoin/forms/defaultdialog.ui \
+  qt/supernodecoin/forms/coldstakingwidget.ui \
+  qt/supernodecoin/settings/forms/settingsbackupwallet.ui \
+  qt/supernodecoin/settings/forms/settingsexportcsv.ui \
+  qt/supernodecoin/settings/forms/settingsbittoolwidget.ui \
+  qt/supernodecoin/settings/forms/settingsconsolewidget.ui \
+  qt/supernodecoin/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/supernodecoin/settings/forms/settingsfaqwidget.ui \
+  qt/supernodecoin/settings/forms/settingsinformationwidget.ui \
+  qt/supernodecoin/settings/forms/settingsmainoptionswidget.ui \
+  qt/supernodecoin/settings/forms/settingsmultisenddialog.ui \
+  qt/supernodecoin/settings/forms/settingsmultisendwidget.ui \
+  qt/supernodecoin/settings/forms/settingssignmessagewidgets.ui \
+  qt/supernodecoin/settings/forms/settingswalletoptionswidget.ui \
+  qt/supernodecoin/settings/forms/settingswalletrepairwidget.ui \
+  qt/supernodecoin/settings/forms/settingswidget.ui \
+  qt/supernodecoin/forms/welcomecontentwidget.ui \
+  qt/supernodecoin/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/supernodecoin/moc_supernodecoingui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/supernodecoin/moc_loadingdialog.cpp \
+  qt/supernodecoin/moc_pwidget.cpp \
+  qt/supernodecoin/moc_focuseddialog.cpp \
+  qt/supernodecoin/moc_snackbar.cpp \
+  qt/supernodecoin/moc_navmenuwidget.cpp \
+  qt/supernodecoin/moc_lockunlock.cpp \
+  qt/supernodecoin/moc_expandablebutton.cpp \
+  qt/supernodecoin/moc_furabstractlistitemdelegate.cpp \
+  qt/supernodecoin/moc_receivedialog.cpp \
+  qt/supernodecoin/moc_pfborderimage.cpp \
+  qt/supernodecoin/moc_topbar.cpp \
+  qt/supernodecoin/moc_txrow.cpp \
+  qt/supernodecoin/moc_dashboardwidget.cpp \
+  qt/supernodecoin/moc_addresslabelrow.cpp \
+  qt/supernodecoin/moc_contactdropdownrow.cpp \
+  qt/supernodecoin/moc_mninfodialog.cpp \
+  qt/supernodecoin/moc_optionbutton.cpp \
+  qt/supernodecoin/moc_coldstakingmodel.cpp \
+  qt/supernodecoin/moc_mnmodel.cpp \
+  qt/supernodecoin/moc_masternodewizarddialog.cpp \
+  qt/supernodecoin/moc_mnrow.cpp \
+  qt/supernodecoin/moc_masternodeswidget.cpp \
+  qt/supernodecoin/moc_myaddressrow.cpp \
+  qt/supernodecoin/moc_csrow.cpp \
+  qt/supernodecoin/moc_contactsdropdown.cpp \
+  qt/supernodecoin/moc_sendchangeaddressdialog.cpp \
+  qt/supernodecoin/moc_sendconfirmdialog.cpp \
+  qt/supernodecoin/moc_sendcustomfeedialog.cpp \
+  qt/supernodecoin/moc_sendchangeaddressdialog.cpp \
+  qt/supernodecoin/moc_sendmultirow.cpp \
+  qt/supernodecoin/moc_send.cpp \
+  qt/supernodecoin/moc_addnewaddressdialog.cpp \
+  qt/supernodecoin/moc_addnewcontactdialog.cpp \
+  qt/supernodecoin/moc_requestdialog.cpp \
+  qt/supernodecoin/moc_receivewidget.cpp \
+  qt/supernodecoin/moc_tooltipmenu.cpp \
+  qt/supernodecoin/moc_addresseswidget.cpp \
+  qt/supernodecoin/moc_defaultdialog.cpp \
+  qt/supernodecoin/moc_coldstakingwidget.cpp \
+  qt/supernodecoin/settings/moc_settingsbackupwallet.cpp \
+  qt/supernodecoin/settings/moc_settingsexportcsv.cpp \
+  qt/supernodecoin/settings/moc_settingsbittoolwidget.cpp \
+  qt/supernodecoin/settings/moc_settingsconsolewidget.cpp \
+  qt/supernodecoin/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/supernodecoin/settings/moc_settingsfaqwidget.cpp \
+  qt/supernodecoin/settings/moc_settingsinformationwidget.cpp \
+  qt/supernodecoin/settings/moc_settingsmainoptionswidget.cpp \
+  qt/supernodecoin/settings/moc_settingsmultisenddialog.cpp \
+  qt/supernodecoin/settings/moc_settingsmultisendwidget.cpp \
+  qt/supernodecoin/settings/moc_settingssignmessagewidgets.cpp \
+  qt/supernodecoin/settings/moc_settingswalletoptionswidget.cpp \
+  qt/supernodecoin/settings/moc_settingswalletrepairwidget.cpp \
+  qt/supernodecoin/settings/moc_settingswidget.cpp \
+  qt/supernodecoin/moc_welcomecontentwidget.cpp \
+  qt/supernodecoin/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/supernodecoin.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/supernodecoin/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_supernodecoin.cpp
+QT_QRC = qt/supernodecoin.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_supernodecoin_locale.cpp
+QT_QRC_LOCALE = qt/supernodecoin_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/supernodecoin/supernodecoingui.h \
+  qt/bitcoinunits.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/trafficgraphwidget.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/supernodecoin/prunnable.h \
+  qt/supernodecoin/pfborderimage.h \
+  qt/supernodecoin/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/supernodecoin/pwidget.h \
+  qt/supernodecoin/focuseddialog.h \
+  qt/supernodecoin/guitransactionsutils.h \
+  qt/supernodecoin/snackbar.h \
+  qt/supernodecoin/navmenuwidget.h \
+  qt/supernodecoin/lockunlock.h \
+  qt/supernodecoin/receivedialog.h \
+  qt/supernodecoin/furlistrow.h \
+  qt/supernodecoin/furabstractlistitemdelegate.h \
+  qt/supernodecoin/txviewholder.h \
+  qt/supernodecoin/qtutils.h \
+  qt/supernodecoin/expandablebutton.h \
+  qt/supernodecoin/topbar.h \
+  qt/supernodecoin/txrow.h \
+  qt/supernodecoin/addressholder.h \
+  qt/supernodecoin/addressfilterproxymodel.h \
+  qt/supernodecoin/dashboardwidget.h \
+  qt/supernodecoin/addresslabelrow.h \
+  qt/supernodecoin/contactdropdownrow.h \
+  qt/supernodecoin/mninfodialog.h \
+  qt/supernodecoin/optionbutton.h \
+  qt/supernodecoin/coldstakingmodel.h \
+  qt/supernodecoin/mnmodel.h \
+  qt/supernodecoin/masternodewizarddialog.h \
+  qt/supernodecoin/mnrow.h \
+  qt/supernodecoin/masternodeswidget.h \
+  qt/supernodecoin/myaddressrow.h \
+  qt/supernodecoin/csrow.h \
+  qt/supernodecoin/contactsdropdown.h \
+  qt/supernodecoin/sendchangeaddressdialog.h \
+  qt/supernodecoin/sendconfirmdialog.h \
+  qt/supernodecoin/sendcustomfeedialog.h \
+  qt/supernodecoin/sendchangeaddressdialog.h \
+  qt/supernodecoin/sendmultirow.h \
+  qt/supernodecoin/send.h \
+  qt/supernodecoin/addnewaddressdialog.h \
+  qt/supernodecoin/addnewcontactdialog.h \
+  qt/supernodecoin/requestdialog.h \
+  qt/supernodecoin/receivewidget.h \
+  qt/supernodecoin/tooltipmenu.h \
+  qt/supernodecoin/addresseswidget.h \
+  qt/supernodecoin/defaultdialog.h \
+  qt/supernodecoin/coldstakingwidget.h \
+  qt/supernodecoin/settings/settingsbackupwallet.h \
+  qt/supernodecoin/settings/settingsexportcsv.h \
+  qt/supernodecoin/settings/settingsbittoolwidget.h \
+  qt/supernodecoin/settings/settingsconsolewidget.h \
+  qt/supernodecoin/settings/settingsdisplayoptionswidget.h \
+  qt/supernodecoin/settings/settingsfaqwidget.h \
+  qt/supernodecoin/settings/settingsinformationwidget.h \
+  qt/supernodecoin/settings/settingsmainoptionswidget.h \
+  qt/supernodecoin/settings/settingsmultisenddialog.h \
+  qt/supernodecoin/settings/settingsmultisendwidget.h \
+  qt/supernodecoin/settings/settingssignmessagewidgets.h \
+  qt/supernodecoin/settings/settingswalletoptionswidget.h \
+  qt/supernodecoin/settings/settingswalletrepairwidget.h \
+  qt/supernodecoin/settings/settingswidget.h \
+  qt/supernodecoin/welcomecontentwidget.h \
+  qt/supernodecoin/splash.h
+
+RES_ICONS = \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/ic-transaction-received.png \
+  qt/res/icons/ic-transaction-mint.png \
+  qt/res/icons/ic-transaction-sent.png \
+  qt/res/icons/ic-transaction-staked.png \
+  qt/supernodecoin/res/img/bg-dashboard-banner.png \
+  qt/supernodecoin/res/img/bg-multi-number-dark.png \
+  qt/supernodecoin/res/img/ic-check-locked.png \
+  qt/supernodecoin/res/img/ic-nav-address.png \
+  qt/supernodecoin/res/img/ic-update.png \
+  qt/supernodecoin/res/img/bg-multi-number.png \
+  qt/supernodecoin/res/img/ic-check-mint-off.png \
+  qt/supernodecoin/res/img/ic-nav-cold-staking.png \
+  qt/supernodecoin/res/img/ic-nav-cold-staking-active.png \
+  qt/supernodecoin/res/img/ic-nav-dashboard-active.png \
+  qt/supernodecoin/res/img/ic-wallet-status-locked.png \
+  qt/supernodecoin/res/img/bg-splash.png \
+  qt/supernodecoin/res/img/ic-check-mint.png \
+  qt/supernodecoin/res/img/ic-nav-dashboard-hover.png \
+  qt/supernodecoin/res/img/ic-wallet-status-staking.png \
+  qt/supernodecoin/res/img/ic-check-peers-off.png \
+  qt/supernodecoin/res/img/ic-nav-dashboard.png \
+  qt/supernodecoin/res/img/ic-wallet-status-unlocked.png \
+  qt/supernodecoin/res/img/ic-check-peers.png \
+  qt/supernodecoin/res/img/ic-nav-master-active.png \
+  qt/supernodecoin/res/img/ic-watch-password-white.png \
+  qt/supernodecoin/res/img/bg-welcome-container.jpg \
+  qt/supernodecoin/res/img/bg-welcome-container.png \
+  qt/supernodecoin/res/img/bg-welcome-container@2x.png \
+  qt/supernodecoin/res/img/bg-welcome-container@3x.png \
+  qt/supernodecoin/res/img/ic-check-staking-off.png \
+  qt/supernodecoin/res/img/ic-nav-master-hover.png \
+  qt/supernodecoin/res/img/ic-watch-password.png \
+  qt/supernodecoin/res/img/bg-welcome.jpg \
+  qt/supernodecoin/res/img/bg-welcome.png \
+  qt/supernodecoin/res/img/ic-check-staking.png \
+  qt/supernodecoin/res/img/ic-nav-master.png \
+  qt/supernodecoin/res/img/img-dashboard-banner.jpg \
+  qt/supernodecoin/res/img/btn-radio-active.png \
+  qt/supernodecoin/res/img/ic-check-sync-off.png \
+  qt/supernodecoin/res/img/ic-nav-privacy-active.png \
+  qt/supernodecoin/res/img/img-empty-contacts.png \
+  qt/supernodecoin/res/img/btn-radio-off.png \
+  qt/supernodecoin/res/img/ic-nav-privacy-hover.png \
+  qt/supernodecoin/res/img/img-empty-dark-contacts.png \
+  qt/supernodecoin/res/img/ic-contact-arrow-down.png \
+  qt/supernodecoin/res/img/ic-contact-arrow-down-white.png \
+  qt/supernodecoin/res/img/ic-check-sync.png \
+  qt/supernodecoin/res/img/ic-check-faq.png \
+  qt/supernodecoin/res/img/ic-nav-privacy.png \
+  qt/supernodecoin/res/img/img-empty-dark-error.png \
+  qt/supernodecoin/res/img/ic-add-label.png \
+  qt/supernodecoin/res/img/ic-pending.png \
+  qt/supernodecoin/res/img/ic-check-theme-dark.png \
+  qt/supernodecoin/res/img/ic-nav-receive-active.png \
+  qt/supernodecoin/res/img/img-empty-dark-masternode.png \
+  qt/supernodecoin/res/img/ic-add-liliac.png \
+  qt/supernodecoin/res/img/ic-check-theme-light.png \
+  qt/supernodecoin/res/img/ic-nav-receive-hover.png \
+  qt/supernodecoin/res/img/img-empty-dark-multisend.png \
+  qt/supernodecoin/res/img/ic-add-purple.png \
+  qt/supernodecoin/res/img/ic-check-white.png \
+  qt/supernodecoin/res/img/ic-nav-receive.png \
+  qt/supernodecoin/res/img/img-empty-dark-peers.png \
+  qt/supernodecoin/res/img/ic-add.png \
+  qt/supernodecoin/res/img/ic-check.png \
+  qt/supernodecoin/res/img/ic-nav-send-active.png \
+  qt/supernodecoin/res/img/img-empty-dark-staking-off.png \
+  qt/supernodecoin/res/img/img-empty-dark-staking-on.png \
+  qt/supernodecoin/res/img/ic-address-book-grey.png \
+  qt/supernodecoin/res/img/ic-chevron-left.png \
+  qt/supernodecoin/res/img/ic-nav-send-hover.png \
+  qt/supernodecoin/res/img/img-empty-dark-transactions.png \
+  qt/supernodecoin/res/img/ic-address-book-white.png \
+  qt/supernodecoin/res/img/ic-chevron-right.png \
+  qt/supernodecoin/res/img/ic-nav-send.png \
+  qt/supernodecoin/res/img/img-empty-error.png \
+  qt/supernodecoin/res/img/ic-address-book.png \
+  qt/supernodecoin/res/img/ic-clear-liliac.png \
+  qt/supernodecoin/res/img/ic-nav-settings-active.png \
+  qt/supernodecoin/res/img/img-empty-masternode.png \
+  qt/supernodecoin/res/img/ic-address-send-white.png \
+  qt/supernodecoin/res/img/ic-clear-purple.png \
+  qt/supernodecoin/res/img/ic-nav-settings-hover.png \
+  qt/supernodecoin/res/img/img-empty-multisend.png \
+  qt/supernodecoin/res/img/ic-address-send.png \
+  qt/supernodecoin/res/img/ic-close-white.png \
+  qt/supernodecoin/res/img/ic-nav-settings.png \
+  qt/supernodecoin/res/img/img-empty-peers.png \
+  qt/supernodecoin/res/img/img-empty-privacy.png \
+  qt/supernodecoin/res/img/img-empty-privacy-dark.png \
+  qt/supernodecoin/res/img/ic-arrow-drop-down-white.png \
+  qt/supernodecoin/res/img/ic-close.png \
+  qt/supernodecoin/res/img/ic-radio-liliac-on.png \
+  qt/supernodecoin/res/img/img-empty-staking-off.png \
+  qt/supernodecoin/res/img/ic-arrow-drop-down.png \
+  qt/supernodecoin/res/img/ic-coin-suno.png \
+  qt/supernodecoin/res/img/ic-receive-off.png \
+  qt/supernodecoin/res/img/img-empty-staking-on.png \
+  qt/supernodecoin/res/img/ic-arrow-drop-up-white.png \
+  qt/supernodecoin/res/img/ic-receive-on.png \
+  qt/supernodecoin/res/img/img-empty-transactions.png \
+  qt/supernodecoin/res/img/ic-arrow-drop-up.png \
+  qt/supernodecoin/res/img/ic-received.png \
+  qt/supernodecoin/res/img/img-logo-supernodecoin.png \
+  qt/supernodecoin/res/img/ic-arrow-drop-white-down.png \
+  qt/supernodecoin/res/img/ic-combo-box.png \
+  qt/supernodecoin/res/img/ic-send.png \
+  qt/supernodecoin/res/img/img-logo-supernodecoin@2x.png \
+  qt/supernodecoin/res/img/ic-arrow-purple-down.png \
+  qt/supernodecoin/res/img/ic-connect.png \
+  qt/supernodecoin/res/img/ic-submenu-lock.png \
+  qt/supernodecoin/res/img/img-logo-supernodecoin@3x.png \
+  qt/supernodecoin/res/img/img-logo-supernodecoin.png \
+  qt/supernodecoin/res/img/ic-arrow-right-white.png \
+  qt/supernodecoin/res/img/ic-arrow-left-white.png \
+  qt/supernodecoin/res/img/ic-arrow-left.png \
+  qt/supernodecoin/res/img/ic-copy-liliac.png \
+  qt/supernodecoin/res/img/ic-submenu-staking.png \
+  qt/supernodecoin/res/img/img-nav-logo-supernodecoin.png \
+  qt/supernodecoin/res/img/ic-arrow-right.png \
+  qt/supernodecoin/res/img/ic-copy.png \
+  qt/supernodecoin/res/img/ic-copy-big.png \
+  qt/supernodecoin/res/img/ic-copy-big-white.png \
+  qt/supernodecoin/res/img/ic-submenu-unlock.png \
+  qt/supernodecoin/res/img/img-nav-logo.png \
+  qt/supernodecoin/res/img/ic-arrow-white-left.png \
+  qt/supernodecoin/res/img/ic-exit.png \
+  qt/supernodecoin/res/img/ic-switch-liliac-on.png \
+  qt/supernodecoin/res/img/img-nav-logo.png \
+  qt/supernodecoin/res/img/ic-arrow-white-right.png \
+  qt/supernodecoin/res/img/ic-expand.png \
+  qt/supernodecoin/res/img/ic-switch-off.png \
+  qt/supernodecoin/res/img/img-qr-test-big.png \
+  qt/supernodecoin/res/img/ic-check-active.png \
+  qt/supernodecoin/res/img/ic-folder.png \
+  qt/supernodecoin/res/img/ic-switch-on.png \
+  qt/supernodecoin/res/img/img-qr-test.png \
+  qt/supernodecoin/res/img/ic-check-box.png \
+  qt/supernodecoin/res/img/ic-check-box-dark-active.png \
+  qt/supernodecoin/res/img/ic-check-box-indeterminate.png \
+  qt/supernodecoin/res/img/ic-check-box-liliac-indeterminate.png \
+  qt/supernodecoin/res/img/ic-label-liliac.png \
+  qt/supernodecoin/res/img/ic-transaction-warning.png \
+  qt/supernodecoin/res/img/ic-transaction-mint.png \
+  qt/supernodecoin/res/img/ic-transaction-mint-inactive.png \
+  qt/supernodecoin/res/img/ic-check-cold-staking.png \
+  qt/supernodecoin/res/img/ic-check-cold-staking-off.png \
+  qt/supernodecoin/res/img/ic-check-cold-staking-enabled.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-cs-contract.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-cs-contract-inactive.png \
+  qt/supernodecoin/res/img/img-qr.png \
+  qt/supernodecoin/res/img/ic-check-connect-off.png \
+  qt/supernodecoin/res/img/ic-check-tor-off.png \
+  qt/supernodecoin/res/img/ic-check-tor.png \
+  qt/supernodecoin/res/img/ic-label.png \
+  qt/supernodecoin/res/img/ic-transaction-received.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-received.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-warning.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-mint.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-mint-inactive.png \
+  qt/supernodecoin/res/img/ic-transaction-received-inactive.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-received-inactive.png \
+  qt/supernodecoin/res/img/img-welcome-step1.png \
+  qt/supernodecoin/res/img/ic-check-connect.png \
+  qt/supernodecoin/res/img/ic-menu-hover.png \
+  qt/supernodecoin/res/img/ic-transaction-sent.png \
+  qt/supernodecoin/res/img/ic-transaction-sent-inactive.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-sent.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-sent-inactive.png \
+  qt/supernodecoin/res/img/img-welcome-step2.png \
+  qt/supernodecoin/res/img/ic-check-dark.png \
+  qt/supernodecoin/res/img/ic-mint.png \
+  qt/supernodecoin/res/img/ic-transaction-staked.png \
+  qt/supernodecoin/res/img/ic-transaction-staked-inactive.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-staked.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-staked-inactive.png \
+  qt/supernodecoin/res/img/img-welcome-step3.png \
+  qt/supernodecoin/res/img/ic-check-liliac-on.png \
+  qt/supernodecoin/res/img/ic-nav-address-active.png \
+  qt/supernodecoin/res/img/ic-unlock-staking.png \
+  qt/supernodecoin/res/img/img-welcome-step4.png \
+  qt/supernodecoin/res/img/ic-check-locked-off.png \
+  qt/supernodecoin/res/img/ic-nav-address-hover.png \
+  qt/supernodecoin/res/img/ic-update-liliac.png \
+  qt/supernodecoin/res/img/ic-arrow-drop-down-purple.png \
+  qt/supernodecoin/res/img/ic-arrow-drop-up-purple.png \
+  qt/supernodecoin/res/img/ic-check-liliac-indeterminate.png \
+  qt/supernodecoin/res/img/ic-check-box-liliac-indeterminate.png \
+  qt/supernodecoin/res/img/ic-transaction-stake-delegated.png \
+  qt/supernodecoin/res/img/ic-transaction-stake-delegated-inactive.png \
+  qt/supernodecoin/res/img/ic-transaction-stake-hot.png \
+  qt/supernodecoin/res/img/ic-transaction-stake-hot-inactive.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-stake-hot.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-stake-hot-inactive.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-stake-delegated.png \
+  qt/supernodecoin/res/img/dark/ic-transaction-stake-delegated-inactive.png \
+  qt/supernodecoin/res/img/ic-transaction-cs-contract.png \
+  qt/supernodecoin/res/img/ic-transaction-cs-contract-inactive.png \
+  qt/supernodecoin/res/img/ic-check-box-indeterminate.png \
+  qt/supernodecoin/res/img/ani-loading-dark.gif \
+  qt/supernodecoin/res/img/ani-loading.gif
+
+
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/supernodecoin/supernodecoingui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/supernodecoin/loadingdialog.cpp \
+  qt/supernodecoin/pwidget.cpp \
+  qt/supernodecoin/focuseddialog.cpp \
+  qt/supernodecoin/guitransactionsutils.cpp \
+  qt/supernodecoin/snackbar.cpp \
+  qt/supernodecoin/navmenuwidget.cpp \
+  qt/supernodecoin/lockunlock.cpp \
+  qt/supernodecoin/receivedialog.cpp \
+  qt/supernodecoin/furabstractlistitemdelegate.cpp \
+  qt/supernodecoin/txviewholder.cpp \
+  qt/supernodecoin/qtutils.cpp \
+  qt/supernodecoin/expandablebutton.cpp \
+  qt/supernodecoin/topbar.cpp \
+  qt/supernodecoin/txrow.cpp \
+  qt/supernodecoin/addressholder.cpp \
+  qt/supernodecoin/addressfilterproxymodel.cpp \
+  qt/supernodecoin/dashboardwidget.cpp \
+  qt/supernodecoin/addresslabelrow.cpp \
+  qt/supernodecoin/contactdropdownrow.cpp \
+  qt/supernodecoin/contactsdropdown.cpp \
+  qt/supernodecoin/optionbutton.cpp \
+  qt/supernodecoin/mninfodialog.cpp \
+  qt/supernodecoin/coldstakingmodel.cpp \
+  qt/supernodecoin/mnmodel.cpp \
+  qt/supernodecoin/masternodewizarddialog.cpp \
+  qt/supernodecoin/mnrow.cpp \
+  qt/supernodecoin/masternodeswidget.cpp \
+  qt/supernodecoin/myaddressrow.cpp \
+  qt/supernodecoin/csrow.cpp \
+  qt/supernodecoin/sendchangeaddressdialog.cpp \
+  qt/supernodecoin/sendconfirmdialog.cpp \
+  qt/supernodecoin/sendcustomfeedialog.cpp \
+  qt/supernodecoin/sendchangeaddressdialog.cpp \
+  qt/supernodecoin/sendmultirow.cpp \
+  qt/supernodecoin/send.cpp \
+  qt/supernodecoin/addnewaddressdialog.cpp \
+  qt/supernodecoin/addnewcontactdialog.cpp \
+  qt/supernodecoin/requestdialog.cpp \
+  qt/supernodecoin/receivewidget.cpp \
+  qt/supernodecoin/tooltipmenu.cpp \
+  qt/supernodecoin/addresseswidget.cpp \
+  qt/supernodecoin/defaultdialog.cpp \
+  qt/supernodecoin/coldstakingwidget.cpp \
+  qt/supernodecoin/settings/settingsbackupwallet.cpp \
+  qt/supernodecoin/settings/settingsexportcsv.cpp \
+  qt/supernodecoin/settings/settingsbittoolwidget.cpp \
+  qt/supernodecoin/settings/settingsconsolewidget.cpp \
+  qt/supernodecoin/settings/settingsdisplayoptionswidget.cpp \
+  qt/supernodecoin/settings/settingsfaqwidget.cpp \
+  qt/supernodecoin/settings/settingsinformationwidget.cpp \
+  qt/supernodecoin/settings/settingsmainoptionswidget.cpp \
+  qt/supernodecoin/settings/settingsmultisenddialog.cpp \
+  qt/supernodecoin/settings/settingsmultisendwidget.cpp \
+  qt/supernodecoin/settings/settingssignmessagewidgets.cpp \
+  qt/supernodecoin/settings/settingswalletoptionswidget.cpp \
+  qt/supernodecoin/settings/settingswalletrepairwidget.cpp \
+  qt/supernodecoin/settings/settingswidget.cpp \
+  qt/supernodecoin/welcomecontentwidget.cpp \
+  qt/supernodecoin/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png
+
+RES_CSS = \
+  qt/supernodecoin/res/css/style_dark.css \
+  qt/supernodecoin/res/css/style_light.css
+
+BITCOIN_RC = qt/res/supernodecoin-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_supernodecoin_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# supernodecoin-qt binary #
+qt_supernodecoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_supernodecoin_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_supernodecoin_qt_SOURCES = qt/supernodecoin.cpp
+if TARGET_DARWIN
+  qt_supernodecoin_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_supernodecoin_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_supernodecoin_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_supernodecoin_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_supernodecoin_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_supernodecoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBSAPLING) $(LIBRUSTZCASH) $(LIBZCASH_LIBS) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_supernodecoin_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_supernodecoin_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/supernodecoinstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/supernodecoinstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/supernodecoin.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/supernodecoin_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name supernodecoin_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name supernodecoin $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_supernodecoin_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+supernodecoin_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_supernodecoin_qt_OBJECTS) qt/supernodecoin-qt$(EXEEXT) $(LIBBITCOINQT)
+
+supernodecoin_qt : qt/supernodecoin-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@
